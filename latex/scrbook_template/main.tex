@@ -1,0 +1,52 @@
+\documentclass[12pt, twoside, 
+               a4paper,
+               % open = right for phd thesis
+               open=any,
+               titlepage,
+               bibliography=totoc,
+               xcolor=dvipsnames,
+               % draft
+               ]{scrbook}
+
+\usepackage{booksettings}
+
+\begin{document}
+
+    \tableofcontents
+
+    \chapter{Theorie}
+    \section{Maxwell}
+    hallo hier beginnt ein Paragraph.\\
+    Und hier noch einer.
+
+    \newpage
+    \section{Euler}
+    test
+    \newpage
+
+    Super, echt Super.
+
+    \newpage
+
+    \chapter{Neues Kapitel}
+    \section{Gauß}
+
+    \autocite{elk}
+
+    \newpage
+
+    \FloatBarrier
+    \clearpage
+
+    \pagenumbering{Roman}
+    \input{appendix.tex}
+    \setcounter{tocdepth}{1}
+    \setcounter{table}{0}
+    \setcounter{equation}{0}
+    \setcounter{figure}{0}
+
+    \FloatBarrier
+    \clearpage
+    \printbibliography
+    
+\end{document}

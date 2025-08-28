@@ -1,0 +1,3 @@
+../c_libraries/include/t_numerics.h
+../c_libraries/lib
+name:tlib

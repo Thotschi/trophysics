@@ -1,0 +1,83 @@
+\subsection{Formulas for determination of errors and fit routines}
+    \label{errorformulas}
+
+    \underline{median} (best value, for which the quadratic deviations become
+    minimal): is used to average different values for \textbf{the same} measured
+    quantity $X$:
+
+    \begin{equation}
+        \bar{x}=\frac{1}{n} \overset{n}{\underset{i=1}{\sum}} x_i
+        \label{eq:median}
+    \end{equation}
+    \\
+
+    \underline{weighted median}: is used to average results of multiple
+    meassurements for same quantity, in which different methods were used; must
+    only be apllied if single results are close enough to each other:
+
+    \begin{equation}
+        \bar{x} = \frac{\underset{i}{\sum }\frac{x_i}{\sigma_i^2}}{\underset{i}{\sum }\frac{1}{\sigma_i^2}}
+        \label{eq:weightedmedian}
+    \end{equation}
+    \\
+
+    \underline{Error of the weighted median}:
+
+    \begin{equation}
+        \sigma = \sqrt{\frac{1}{\underset{i}{\sum}\frac{1}{\sigma_i^2}}}
+        \label{eq:errorweightedmedian}
+    \end{equation}
+    \\
+
+    \underline{total error}: the total error combines the statistical and
+    systematic error of a messurement into one error, where the statistical
+    error is a random distribution around one value, which is immanent to a
+    physical meassurement e.g. errors of instruments, and the systematic error
+    is a constant error, which is present in every meassurement, even if the
+    experiment is repeated, e.g. impurities of used sample:
+    
+    \begin{equation}
+        \sigma_{tot} =\sqrt{\sigma_{sys}^2+\sigma_{stat}^2}
+        \label{eq:totalerror}
+    \end{equation}
+    \\
+
+    \underline{error propagation}: quantity $f$ depends on $N$ erroneous quantities
+    $x_i$, each with an error of $\sigma_{x_i}$. Then its error (of said
+    formula) is calculated by the following equation;
+
+    \begin{equation}
+        \sigma_f = \sqrt{\sum_{i=1}^{N}\left(\sigma_{x_i} \cdot \frac{\partial f}{\partial x_i}\right)^2}
+        \label{eq:gausserrprop}
+    \end{equation}
+
+\newpage
+
+    \underline{linear regression}: if one is primarily interested in the slope
+    $m$ of a graph that clearly shows a linear correlation, linear regression
+    with the y-intercept $b$ is used to determine both values; if apllied, the
+    calculations are done by function \texttt{linregress} from
+    \textit{scipy.stats} in Python:
+
+    \begin{equation}
+        m = \frac{n \sum_i x_i y_i - \sum_i x_i \sum_i y_i}{n \sum_i x_i^2 - (\sum_i x_i)^2}
+        \label{eq:m_linregress}
+    \end{equation}
+
+    \begin{equation}
+        b = \frac{\sum_i x_i^2 \sum_i y_i - \sum_i x_i \sum_i x_i y_i}{n \sum_i x_i^2 - (\sum_i x_i)^2}
+        \label{eq:b_linregress}
+    \end{equation}
+    \\
+
+    \underline{errors for fit values of linear regression}:
+
+    \begin{equation}
+        \sigma_m^2 = \frac{n \sum_i (y_i - b - mx_i)^2}{(n-2)(n \sum_i x_i^2 - (\sum_i x_i)^2)}
+        \label{eq:m_linregress_err}
+    \end{equation}
+
+    \begin{equation}
+        \sigma_b^2 = \frac{\sum_i x_i^2 \sum_i (y_i - b - mx_i)^2}{(n-2)(n \sum_i x_i^2 -(\sum_i x_i)^2)}
+        \label{eq:b_linregress_err}
+    \end{equation}

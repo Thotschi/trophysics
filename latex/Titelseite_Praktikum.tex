@@ -1,0 +1,49 @@
+%% Insert the following redefinition of variables to adjust titlepage in main.tex:
+
+%\newcommand{\EXPNUMBER}{}
+%\newcommand{\EXPNAME}{}
+%\newcommand{\TITLE}{}
+%\newcommand{\FIRSTNAME}{}
+%\newcommand{\SECONDNAME}{}
+%\newcommand{\FIRSTEMAIL}{}
+%\newcommand{\SECONDEMAIL}{}
+%\newcommand{\TUTOR}{}
+%\newcommand{\DATE}{}
+
+\begin{titlepage}
+    \centering
+    \textsc{\Large Anfängerpraktikum der Fakultät für
+    Physik,\\[1.5ex] Universität Göttingen}
+
+    \vspace*{4.2cm}
+
+    \rule{\textwidth}{1pt}\\[0.5cm]
+    {\huge \bfseries
+    \EXPNUMBER{}\\[1.5ex]
+    \EXPNAME{}}\\[0.5cm]
+    \rule{\textwidth}{1pt}
+
+    \vspace*{2.7cm}
+
+    \begin{Large}
+    \begin{tabular}{ll}
+        Praktikant:in 1: & \FIRSTNAME{}\\
+        Praktikant:in 2: & \SECONDNAME{}\\
+        E-Mail: & \FIRSTEMAIL{} \\
+                & \SECONDEMAIL{} \\
+        Tutor:in: & \TUTOR{}\\
+        Abgabedatum: & \DATE{} \\ 
+    \end{tabular}
+    \end{Large}
+
+    \vspace*{0.8cm}
+    
+    \begin{Large}
+    \fbox{
+        \begin{minipage}[t][2.5cm][t]{6cm} 
+        Testat:
+    \end{minipage}
+    }
+    \end{Large}
+
+\end{titlepage}

@@ -1,0 +1,111 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{booksettings}[2025/08/24 Unified template for KOMA and standard classes]
+
+\usepackage{../settings}
+
+%===========================================================================================
+% different layout options (depending on documentclass)
+%===========================================================================================
+
+\RequirePackage{etoolbox}
+
+% 1. test if KOMA-Script was loaded
+\newif\ifIsKOMA
+\ifdef{\KOMAClassName}{\IsKOMAtrue}{\IsKOMAfalse}
+
+% 2. if KOMA-Script: set options
+\ifIsKOMA
+  \KOMAoptions{
+  paper=a4,
+  fontsize=12pt,
+  %DIV=12,       % Satzspiegel-Teilung (höher = schmalere Ränder)
+  %BCOR=10mm     % Bundstegkorrektur für Bindung
+  }
+
+  \RequirePackage[automark,headsepline]{scrlayer-scrpage}
+  \clearpairofpagestyles
+
+  \automark[section]{chapter} % füllt \leftmark (Kapitel) und \rightmark (Section)
+
+  % outer header: even = Chapter outer left, odd = Section outer right
+  \ohead{\ifthispageodd{\rightmark}{\leftmark}}
+
+  % outer footer
+  \ofoot{\pagemark}
+
+  % indentation caption
+  \setcapindent{0em}
+  % indentation paragraph
+  \setlength\parindent{10pt}
+
+\else
+  % 3. if standard classes: load packages for layout and header
+  \RequirePackage{geometry}
+  \geometry{
+    a4paper,
+    left=25mm,
+    right=25mm,
+    top=25mm,
+    bottom=20mm,
+    headheight=15pt,
+  }
+  \RequirePackage{fancyhdr}
+
+	\pagestyle{fancy}
+	\fancyhf{}
+	\fancyhead[LE]{\nouppercase{\leftmark}}
+	\fancyhead[RO]{\nouppercase{\rightmark}} 
+	%\fancyhead[RO]{\slshape\nouppercase{\leftmark}}
+	\fancyfoot[LE, RO]{\thepage}
+
+  % Optional: Zeilenabstand zwischen Absätzen
+  \setlength{\parskip}{0.5\baselineskip}
+  \setlength{\parindent}{0pt}
+\fi
+
+
+
+
+
+\usepackage{lmodern}
+\setstretch{1.25}
+
+
+% settings captions
+\setkomafont{captionlabel}{\sffamily\bfseries}
+
+\RequirePackage[ngerman, english]{babel}
+
+% Adjust numbering depth and TOC depth here
+\setcounter{secnumdepth}{1} % Number only to \subsection
+\setcounter{tocdepth}{1}    % Show down to \paragraph in TOC
+
+\numberwithin{figure}{section}
+\numberwithin{equation}{subsection}
+
+%===========================================================================================
+% bibliography settings
+%===========================================================================================
+
+\RequirePackage{csquotes}
+\RequirePackage[
+    backend=biber,
+    bibwarn=true,
+    bibencoding=utf8,
+    % set alphabetical order of references for english languages
+    sortlocale=en_US,
+    style=apa,
+    maxbibnames=3,
+    minbibnames=1,
+]{biblatex}
+
+\addbibresource{references.bib}
+\DeclareLanguageMapping{english}{english-apa}
+\DefineBibliographyStrings{english}{
+   andothers = {{et\,al\adddot}},
+}
+
+\renewcommand*{\mkbibnamefamily}{\textsc}
+
+\RequirePackage[pdfpagelabels=true,hidelinks]{hyperref}
+% insert \printbibliography whereever you want the references to appear in your pdf

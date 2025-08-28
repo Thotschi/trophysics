@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=80.9.0", "wheel>=0.45.1", "pandas>=2.3.0", "numpy>=2.3.1", "scikit-learn>=1.7.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tmlearn"
+version = "0.1.0"
+description = "Some description."
+authors = [{ name = "Thorge Reinisch", email = "thorge.reinisch@gmail.com"}]
+requires-python = ">=3.9"
+dependencies = [
+    "setuptools >= 80.9.0",
+    "wheel >= 0.45.1",
+    "pandas >= 2.3.0",
+    "numpy >= 2.3.1",
+    "scikit-learn >= 1.7.0"
+]

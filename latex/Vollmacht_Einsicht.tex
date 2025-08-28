@@ -1,0 +1,71 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                                                                           %
+%       Dies ist eine Vorlage für eine Vollmacht, damit andere für euch in die Einsicht gehen dürfen.       %
+%                                                                                                           %
+%       Schreibe in die Mengenklammern unten die entsprechenden Daten.                                      %
+%       Sie werden dann im Dokument automatisch eingefügt.                                                  %
+%       Denke auch daran, die Datei Studierendenausweis.png in den gleichen Ordner zu legen.                %
+%                                                                                                           %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Deine Matrikelnummer
+\newcommand{\MATRIKELNUMMER}{}
+% Name der Person, die für dich in die Einsicht gehen soll
+\newcommand{\BEVOLLMAECHTIGTER}{}
+% Schreibe hier Erst (Zweit) für den Erst- oder Zweittermin der Klausur
+\newcommand{\TERMIN}{}
+% Name des Moduls (Experimentalphysik IV, Analytische Mechanik, ...)
+\newcommand{\MODULNAME}{}
+% Datum der Klausur
+\newcommand{\DATUM}{}
+
+
+\documentclass[12pt,a4paper]{article}
+\pagestyle{empty}
+\setlength\parindent{0pt}
+\usepackage{graphicx}
+\usepackage{geometry}
+\geometry{
+	a4paper,
+	top=25mm,
+	bottom=20mm,
+	left=25mm,
+	right=25mm
+}
+
+\begin{document}
+    \begin{center}
+        \Large \underline{Vollmacht zur Einsichtnahme in Prüfungsunterlagen}
+    \end{center}
+
+    \vspace{1cm}
+    Hiermit bevollmächtige ich (Matrikelnummer \MATRIKELNUMMER{}, s. Anhang)
+    \BEVOLLMAECHTIGTER{}, mich in der Klausureinsicht für den \TERMIN{}termin zur
+    Klausur des Moduls \MODULNAME{} vom \DATUM{} zu vertreten.
+
+    \vspace{4cm}
+
+    \begin{minipage}{0.5\textwidth}
+        \begin{flushleft}
+            \rule{4cm}{0.1mm}\\
+            Ort, Datum
+        \end{flushleft}
+    \end{minipage}
+    \hspace{2.5cm}
+    \begin{minipage}{0.5\textwidth}
+        \begin{flushleft}
+            \rule{4cm}{0.1mm}\\
+            Unterschrift
+        \end{flushleft}
+    \end{minipage}
+
+    \vspace{9cm}
+
+
+
+    \begin{figure}[h]
+        \includegraphics[width=8cm]{Studierendenausweis.png}
+    \end{figure}
+
+
+\end{document}

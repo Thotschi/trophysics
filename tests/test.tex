@@ -1,0 +1,33 @@
+\documentclass[12pt,a4paper,titlepage,headinclude,bibtotoc,xcolor=dvipsnames]{scrartcl}
+% --> fontsize = 12 pt., layout = DIN A4 paper, titlepage = true,
+% headinclude = horizontal line at each page,
+% bibtotoc = bibliography to table of contents,
+% xcolor enables more color options for certain kinds of documents,
+% documentclass = scrartcl = script article
+\usepackage{../latex/scrartclsettings}
+
+\usepackage[ngerman]{babel}
+\usepackage{csquotes}
+\usepackage[backend=biber, style=authoryear]{biblatex}
+\renewcommand*{\mkbibnamefamily}{\textsc}
+
+\usepackage{minted}
+
+\begin{filecontents}{\jobname.bib}
+@book{elk,
+  author    = {Anne Elk},
+  title     = {A Theory on Brontosauruses},
+  year      = {1972},
+  publisher = {Monthy \& Co.},
+  location  = {London},
+}
+\end{filecontents}
+\addbibresource{\jobname.bib}
+\addbibresource{biblatex-examples.bib}
+
+\begin{document}
+Lorem \autocite[S. 42][]{sigfridsson,elk}\\
+$1/a$
+
+\printbibliography
+\end{document}

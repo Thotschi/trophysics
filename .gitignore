@@ -1,0 +1,50 @@
+# Ignore all
+*
+
+# Unignore all needed files:
+
+# c headers and source code
+!*.c
+!*.h
+
+# python and jupyter notebooks
+!*.py
+!*.ipynb
+
+# cython
+!*.pyx
+!*.pxd
+
+# python libraries
+!pyproject.toml
+!MANIFEST.in
+
+# latex document and style
+!*.tex
+!*.sty
+
+# other languages
+!*.swift
+!*.fish
+
+# text formats
+!*.md
+
+# others
+!makefile
+!.gitignore
+!*.env.template
+!README.pdf
+!dependencies.txt
+
+
+# other content like png, csv, txt should be reproducible by code in this repo
+# or else storaged in a corresponding cloud server
+!.license.txt
+
+# Unignore all dirs
+!*/
+
+# explicitly ignore to make very clear that these must never be traced
+*.venv
+*.env

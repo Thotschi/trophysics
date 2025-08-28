@@ -1,0 +1,275 @@
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %                                                                                             %
+    %    This meta package for LaTeX projects provides several other packages I discovered        %
+    %    over the years and found useful. So I wanted to save them anywhere so that I would       %
+    %    not have to read their documentations anew. This package should be as general as         %
+    %    possible. Therefore, any modifications for individual project must be made at its        %
+    %    preamble.                                                                                %
+    %                                                                                             %
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%--------------------------------------------------------------------------------------------------------
+
+\ProvidesPackage{settings}[2025/08/24 v1.0 General settings for any document class]
+
+% % This file provides general settings for a LaTex document.
+% % To apply these settings, insert:
+
+% \documentclass[12pt, 
+%                a4paper,
+%                % open is page where chapters begin
+%                open=any,
+%                titlepage,
+%                bibliography=totoc,
+%                xcolor=dvipsnames,
+%                % draft
+%                ]{scrbook}
+
+% % in the beginning of new main.tex.
+% % script article is for shorter science articles, scrbook is for several hundreds to thousand pages
+
+%===========================================================================================
+% bibliography packages
+%===========================================================================================
+
+% % bibliography options
+% % citation styles: https://www.overleaf.com/learn/latex/Biblatex_citation_styles
+% \usepackage{csquotes}
+% \usepackage[
+%     backend=biber,
+%     bibwarn=true,
+%     bibencoding=utf8,
+%     % set alphabetical order of references for german languages
+%     % sortlocale=de_DE,
+%     style=apa,
+% ]{biblatex}
+% % \DeclareLanguageMapping{ngerman}{ngerman-apa}
+% % \DefineBibliographyStrings{ngerman}{
+% %    andothers = {{et\,al\adddot}},
+% % }
+% % don't forget to set biber als bibliography tool in your latex editor
+% % else compilation does not work!
+% % authors in small caps
+% \renewcommand*{\mkbibnamefamily}{\textsc}
+% % usage (mainly for bachelor, master, phdf thesis):
+% % - for in text use, e.g. Demtröder (2025) defines ...: \textcite{label} --> author (year) 
+% % - else "E=mc^2" (Einstein, 1905): \autocite[pre note][post note]{label} --> (pre note author, year, post note)
+% % or \autocite[see]{label} --> (see author, year)
+% % or \autocite{label} --> (author, year)
+% % source of your bib file:
+% \addbibresource{references.bib}
+% % insert \printbibliography whereever you want the references to appear in your pdf
+
+% % hyperref must be imported simultaneously with bibliography options for them to work properly
+% % hyperrefs in pdf without colored frames
+% \usepackage[hidelinks]{hyperref}
+% % or using rgb 0-1 from xcolor
+% \usepackage[colorlinks=false,linkbordercolor={.3 .5 .8}, citebordercolor={.1 .6 .1}]{hyperref}
+% % or predef colors
+% \usepackage[urlcolor=blue]{hyperref}
+% % documentation: https://www.namsu.de/Extra/pakete/Hyperref.html
+
+
+%===========================================================================================
+% text settings
+%===========================================================================================
+
+% line spacing
+\usepackage{setspace}
+% % insert in each new document: \setstretch{x}, e.g. x = 1.25 to change
+% allows output of umlauts in pdf --> for compilation
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+% documentation: https://www.namsu.de/Extra/pakete/Xcolor.html
+\usepackage[pdftex,table,xcdraw,dvipsnames]{xcolor}
+% end notes which can be inserted whereever you like
+\usepackage{endnotes}
+% create endnote: \endnote{content}
+% print endnotes: \theendnotes
+% with layout options:
+% { \parindent 0pt
+%     \parskip 2ex
+%     \def\enotesize{\normalsize}
+%     \theendnotes   }
+
+% visualize code on document
+% \usepackage{minted}
+% % manually insert code:
+% \definecolor{LightGray}{gray}{0.9}
+% \begin{minted}
+% [
+% % lines over and under code box as frame in dist framesep to box
+% frame=lines,
+% framesep=2mm,
+% baselinestretch=1.2,
+% % background color, define any color you want using xcolor
+% bgcolor=LightGray,
+% fontsize=\footnotesize,
+% % line numbers on the left
+% linenos
+% ]
+% {python}
+% import numpy as np
+% #...
+% \end{minted}
+
+% % insert file with source code
+% \definecolor{LightGray}{gray}{0.9}
+% \inputminted[
+% % lines over and under code box as frame in dist framesep to box
+% frame=lines,
+% framesep=2mm,
+% baselinestretch=1.2,
+% % background color, define any color you want using xcolor
+% bgcolor=LightGray,
+% fontsize=\footnotesize,
+% % line numbers on the left
+% linenos
+% ]
+% {c}{program.c}
+
+% other possibility to portray code
+\usepackage{listings}
+% \begin{lstlisting}
+% import numpy as np
+% array = np.array([1,2,3])
+% \end{lstlisting}
+
+%===========================================================================================
+% figure settings
+%===========================================================================================
+
+% \includegraphics[draft,width=h16cm]{path/name.png} leaves black frame inplace of image
+% --> reduces compiling time, or use draft in documentclass to apply globally
+\usepackage{graphicx}
+% force figure by capital letters (h,t,b:here,top,bottom) to given position in pdf
+\usepackage{float}
+% text block next to figure
+\usepackage{wrapfig}
+\usepackage{subfig}
+% prevents floats from entering another section (in best hope)
+\usepackage{placeins}
+% makes inclusion of external pdfs in main.tex easier
+\usepackage{pdfpages}
+% allows to adjust figure within implementation in tex
+\usepackage{adjustbox}
+% allows to set frames around figures
+\usepackage{gradientframe}
+
+% std path for graphics
+\graphicspath{{images/}}
+
+%===========================================================================================
+% table settings
+%===========================================================================================
+
+% join multiple rows by cmd \multirow{number of rows}{width of column}{content of cell}
+\usepackage{multirow}
+% usage: \makecell{row1\\row2} is formatted as one cell in table
+\usepackage{makecell}
+
+% % the code below allows to create tables with data which is imported from csv file
+\usepackage{csvsimple}
+% \begin{filecontents*}{test.csv}
+%   column1, column2
+%   1, 2
+%   3, 4
+% \end{filecontents*}
+% \begin{table}[h]
+%   \centering
+%   \begin{tabular}{c|c}
+%     % you have to name columns in csv file and seperate them with commas,
+%     % like in the example above
+%     \csvreader[head to column names]{filename.csv}{}
+%     {\\\column1 & \column2 & ...}
+%   \end{tabular}
+%   \caption{}
+%   \label{tab:}
+% \end{table}
+
+%===========================================================================================
+% todo settings
+%===========================================================================================
+
+% ToDo options
+% source: https://tex.stackexchange.com/questions/9796/how-to-add-todo-notes
+\usepackage[colorinlistoftodos,prependcaption,textsize=tiny]{todonotes}
+% Use more than one optional parameter in a new commands
+\usepackage{xargs}
+\newcommandx{\unsure}[2][1=]{\todo[linecolor=red,backgroundcolor=red!25,bordercolor=red,#1]{#2}}
+\newcommandx{\change}[2][1=]{\todo[linecolor=blue,backgroundcolor=blue!25,bordercolor=blue,#1]{#2}}
+\newcommandx{\info}[2][1=]{\todo[linecolor=OliveGreen,backgroundcolor=OliveGreen!25,bordercolor=OliveGreen,#1]{#2}}
+\newcommandx{\improvement}[2][1=]{\todo[linecolor=Plum,backgroundcolor=Plum!25,bordercolor=Plum,#1]{#2}}
+\newcommandx{\thiswillnotshow}[2][1=]{\todo[disable,#1]{#2}}
+
+%===========================================================================================
+% math settings
+%===========================================================================================
+
+\usepackage{amsthm}
+\usepackage{amsmath}
+% tilted fractions
+\usepackage{xfrac}
+% documentation: https://ctan.net/macros/latex/contrib/bigints/doc/pdf/bigints.pdf
+\usepackage{bigints}
+\usepackage{amssymb}
+% documentation: https://www.namsu.de/Extra/pakete/mathtools/Mathtools.html
+\usepackage{mathtools}
+% cancel out factors in products
+\usepackage{cancel}
+% vectors, matrices etc.
+% --> \begin{pmatrix}1 & 2 & -3 \\ 4 & 0 & 1\end{pmatrix} for matrix with round brackets
+% bmatrix for square brackets, vmatrix for determinant of matrix
+\usepackage{array}
+% enhances features for quantum mechanics such as braket notation
+\usepackage{quantikz}
+
+%===========================================================================================
+% new symbols
+%===========================================================================================
+
+% bold character for vectors
+\newcommand*{\bvec}[1]{\boldsymbol{#1}}
+
+% symbol for direct current
+% source: https://tex.stackexchange.com/questions/40624/howto-typeset-the-direct-current-symbol-in-latex
+\newcommand{\mathdirectcurrent}{\mathrel{\mathpalette\mathdirectcurrentinner\relax}}
+\newcommand{\mathdirectcurrentinner}[2]{
+  \settowidth{\dimen0}{$#1=$}%
+  \vbox to .85ex {\offinterlineskip
+    \hbox to \dimen0{\hss\leaders\hrule\hskip.85\dimen0\hss}
+    \vskip.35ex
+    \hbox to \dimen0{\hss
+      \leaders\hrule\hskip.17\dimen0
+      \hskip.17\dimen0
+      \leaders\hrule\hskip.17\dimen0
+      \hskip.17\dimen0
+      \leaders\hrule\hskip.17\dimen0
+    \hss}
+    \vfill
+  }
+}
+\newcommand{\textdirectcurrent}{\mathdirectcurrentinner{\textstyle}{}}
+
+% references error formula by name and not by "Gleichung/equation ..."
+% in german:
+\newcommand{\gaussfehlerref}{
+    \begingroup
+    \def\equationautorefname{Gaußscher Fehlerfortpflanzung}
+    \autoref{eq:gaussfehlerfort}
+    \endgroup
+}
+
+% in english:
+\newcommand{\gausserrorref}{
+    \begingroup
+    \def\equationautorefname{Gaussian error propagation}
+    \autoref{eq:gausserrprop}
+    \endgroup
+}
+
+% template defintion of new color
+% --> name; format of color: rgb, hex...; code
+% \definecolor{my_Color}{rgb}{0.5,0.5,0.5}

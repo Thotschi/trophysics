@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=80.9.0", "wheel>=0.45.1", "python-dotenv>=1.1.1", "groq>=0.29.0", "openai>=1.91.0", "datetime>=5.5"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "io_utils"
+dynamic = ["version"]
+description = "Provides input output utensils for numerous applications."
+authors = [{ name = "Thorge Reinisch", email = "thorge.reinisch@gmail.com"}]
+license = { file = "LICENSE.txt"}
+readme = "README.md"
+requires-python = ">=3.13"
+classifiers = [
+    "Development Status :: 4 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: Other/Proprietary License",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries",
+    "Operating System :: Unix",
+    "Operating System :: MacOS",
+]
+dependencies = [
+    "setuptools >= 80.9.0",
+    "wheel >= 0.45.1",
+    "python-dotenv >= 1.1.1",
+    "groq >= 0.29.0",
+    "openai >= 1.91.0",
+    "datetime >= 5.5",
+]
+
+[project.scripts]
+io_utils-config = "io_utils.cli.shell_scripts:main"
+
+
+[tool.setuptools.dynamic]
+version = {attr = "io_utils.__version__"}
