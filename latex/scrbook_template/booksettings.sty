@@ -33,13 +33,14 @@
   % outer footer
   \ofoot{\pagemark}
 
-  % indentation caption
-  \setcapindent{0em}
   % indentation paragraph
   \setlength\parindent{10pt}
 
   % settings captions
   \setkomafont{captionlabel}{\sffamily\bfseries}
+  % indentation caption
+  \setcapindent{0em}
+
 
 \else
   % 3. if standard classes: load packages for layout and header
@@ -64,6 +65,10 @@
   % Optional: Zeilenabstand zwischen Absätzen
   \setlength{\parskip}{0.5\baselineskip}
   \setlength{\parindent}{0pt}
+
+  \RequirePackage{caption}
+  \captionsetup[figure]{labelfont={bf,sf}}
+  \captionsetup[table]{labelfont={bf,sf}}
 \fi
 
 
