@@ -75,17 +75,17 @@
 %===========================================================================================
 
 % line spacing
-\usepackage{setspace}
+\RequirePackage{setspace}
 % % insert in each new document: \setstretch{x}, e.g. x = 1.25 to change
 % allows output of umlauts in pdf --> for compilation
 
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc}
 
 % documentation: https://www.namsu.de/Extra/pakete/Xcolor.html
-\usepackage[pdftex,table,xcdraw,dvipsnames]{xcolor}
+\RequirePackage[pdftex,table,xcdraw,dvipsnames]{xcolor}
 % end notes which can be inserted whereever you like
-\usepackage{endnotes}
+\RequirePackage{endnotes}
 % create endnote: \endnote{content}
 % print endnotes: \theendnotes
 % with layout options:
@@ -131,7 +131,7 @@
 % {c}{program.c}
 
 % other possibility to portray code
-\usepackage{listings}
+\RequirePackage{listings}
 % \begin{lstlisting}
 % import numpy as np
 % array = np.array([1,2,3])
@@ -143,20 +143,20 @@
 
 % \includegraphics[draft,width=h16cm]{path/name.png} leaves black frame inplace of image
 % --> reduces compiling time, or use draft in documentclass to apply globally
-\usepackage{graphicx}
+\RequirePackage{graphicx}
 % force figure by capital letters (h,t,b:here,top,bottom) to given position in pdf
-\usepackage{float}
+\RequirePackage{float}
 % text block next to figure
-\usepackage{wrapfig}
-\usepackage{subfig}
+\RequirePackage{wrapfig}
+\RequirePackage{subfig}
 % prevents floats from entering another section (in best hope)
-\usepackage{placeins}
+\RequirePackage{placeins}
 % makes inclusion of external pdfs in main.tex easier
-\usepackage{pdfpages}
+\RequirePackage{pdfpages}
 % allows to adjust figure within implementation in tex
-\usepackage{adjustbox}
+\RequirePackage{adjustbox}
 % allows to set frames around figures
-\usepackage{gradientframe}
+\RequirePackage{gradientframe}
 
 % std path for graphics
 \graphicspath{{images/}}
@@ -166,12 +166,12 @@
 %===========================================================================================
 
 % join multiple rows by cmd \multirow{number of rows}{width of column}{content of cell}
-\usepackage{multirow}
+\RequirePackage{multirow}
 % usage: \makecell{row1\\row2} is formatted as one cell in table
-\usepackage{makecell}
+\RequirePackage{makecell}
 
 % % the code below allows to create tables with data which is imported from csv file
-\usepackage{csvsimple}
+\RequirePackage{csvsimple}
 % \begin{filecontents*}{test.csv}
 %   column1, column2
 %   1, 2
@@ -195,9 +195,9 @@
 
 % ToDo options
 % source: https://tex.stackexchange.com/questions/9796/how-to-add-todo-notes
-\usepackage[colorinlistoftodos,prependcaption,textsize=tiny]{todonotes}
+\RequirePackage[colorinlistoftodos,prependcaption,textsize=tiny]{todonotes}
 % Use more than one optional parameter in a new commands
-\usepackage{xargs}
+\RequirePackage{xargs}
 \newcommandx{\unsure}[2][1=]{\todo[linecolor=red,backgroundcolor=red!25,bordercolor=red,#1]{#2}}
 \newcommandx{\change}[2][1=]{\todo[linecolor=blue,backgroundcolor=blue!25,bordercolor=blue,#1]{#2}}
 \newcommandx{\info}[2][1=]{\todo[linecolor=OliveGreen,backgroundcolor=OliveGreen!25,bordercolor=OliveGreen,#1]{#2}}
@@ -208,23 +208,24 @@
 % math settings
 %===========================================================================================
 
-\usepackage{amsthm}
-\usepackage{amsmath}
+\RequirePackage{amsthm}
+\RequirePackage{amsmath}
 % tilted fractions
-\usepackage{xfrac}
+\RequirePackage{xfrac}
 % documentation: https://ctan.net/macros/latex/contrib/bigints/doc/pdf/bigints.pdf
-\usepackage{bigints}
-\usepackage{amssymb}
+\RequirePackage{bigints}
+\RequirePackage{amssymb}
 % documentation: https://www.namsu.de/Extra/pakete/mathtools/Mathtools.html
-\usepackage{mathtools}
+\RequirePackage{mathtools}
 % cancel out factors in products
-\usepackage{cancel}
+\RequirePackage{cancel}
 % vectors, matrices etc.
 % --> \begin{pmatrix}1 & 2 & -3 \\ 4 & 0 & 1\end{pmatrix} for matrix with round brackets
 % bmatrix for square brackets, vmatrix for determinant of matrix
-\usepackage{array}
+\RequirePackage{array}
 % enhances features for quantum mechanics such as braket notation
-\usepackage{quantikz}
+\RequirePackage{quantikz}
+\RequirePackage{siunitx}
 
 %===========================================================================================
 % new symbols
@@ -232,6 +233,14 @@
 
 % bold character for vectors
 \newcommand*{\bvec}[1]{\boldsymbol{#1}}
+
+% curl, divergence, gradient
+\DeclareMathOperator*{\curl}{curl}
+\DeclareMathOperator*{\diver}{div}
+\DeclareMathOperator*{\grad}{\mathbf{grad}}
+
+\theoremstyle{definition}
+\newtheorem{postulate}{Postulate}
 
 % symbol for direct current
 % source: https://tex.stackexchange.com/questions/40624/howto-typeset-the-direct-current-symbol-in-latex
@@ -270,6 +279,12 @@
     \endgroup
 }
 
-% template defintion of new color
-% --> name; format of color: rgb, hex...; code
+% % template defintion of new color
+% % --> name; format of color: rgb, hex...; code
 % \definecolor{my_Color}{rgb}{0.5,0.5,0.5}
+
+% % template for new theorem
+% % styles: definition, plain, remark
+% \theoremstyle{style}
+% \newtheorem*{bolz}{Bolzano-Weierstraß}
+% % the star indicates that the theorem is not numbered

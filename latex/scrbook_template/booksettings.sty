@@ -4,7 +4,7 @@
 \usepackage{../settings}
 
 %===========================================================================================
-% different layout options (depending on documentclass)
+% layout and formatting options (depending on documentclass)
 %===========================================================================================
 
 \RequirePackage{etoolbox}
@@ -13,8 +13,13 @@
 \newif\ifIsKOMA
 \ifdef{\KOMAClassName}{\IsKOMAtrue}{\IsKOMAfalse}
 
+%-----------------------------------------------------------------------
 % 2. if KOMA-Script: set options
 \ifIsKOMA
+  %--------------------------------------
+  % format
+  %--------------------------------------
+
   \KOMAoptions{
   paper=a4,
   fontsize=12pt,
@@ -22,26 +27,34 @@
   %BCOR=10mm     % Bundstegkorrektur für Bindung
   }
 
+  %--------------------------------------
+  % header and footer
+  %--------------------------------------
+
   \RequirePackage[automark,headsepline]{scrlayer-scrpage}
   \clearpairofpagestyles
 
   \automark[section]{chapter} % füllt \leftmark (Kapitel) und \rightmark (Section)
 
   % outer header: even = Chapter outer left, odd = Section outer right
-  \ohead{\ifthispageodd{\rightmark}{\leftmark}}
+  \ohead{\ifthispageodd{\slshape\rightmark}{\slshape\leftmark}}
 
   % outer footer
   \ofoot{\pagemark}
 
+  %--------------------------------------
+  % text and captions
+  %--------------------------------------
+
   % indentation paragraph
-  \setlength\parindent{10pt}
+  \setlength\parindent{15pt}
 
   % settings captions
   \setkomafont{captionlabel}{\sffamily\bfseries}
   % indentation caption
   \setcapindent{0em}
 
-
+%-----------------------------------------------------------------------
 \else
   % 3. if standard classes: load packages for layout and header
   \RequirePackage{geometry}
@@ -53,39 +66,61 @@
     bottom=20mm,
     headheight=15pt,
   }
+
+  %--------------------------------------
+  % header and footer
+  %--------------------------------------
+
   \RequirePackage{fancyhdr}
 
 	\pagestyle{fancy}
 	\fancyhf{}
-	\fancyhead[LE]{\nouppercase{\leftmark}}
-	\fancyhead[RO]{\nouppercase{\rightmark}} 
+  \setlength{\headheight}{15pt}
+	\fancyhead[LE]{\slshape\nouppercase{\leftmark}}
+	\fancyhead[RO]{\slshape\nouppercase{\rightmark}} 
 	%\fancyhead[RO]{\slshape\nouppercase{\leftmark}}
 	\fancyfoot[LE, RO]{\thepage}
 
+  % use
+  % \thispagestyle{empty}
+  % to remove header/footer on specific pages
+
+  %--------------------------------------
+  % text and captions
+  %--------------------------------------
+
   % Optional: Zeilenabstand zwischen Absätzen
   \setlength{\parskip}{0.5\baselineskip}
-  \setlength{\parindent}{0pt}
+  \setlength{\parindent}{15pt}
 
   \RequirePackage{caption}
   \captionsetup[figure]{labelfont={bf,sf}}
   \captionsetup[table]{labelfont={bf,sf}}
 \fi
 
-
-
-
+%===========================================================================================
+% text options
+%===========================================================================================
 
 \usepackage{lmodern}
 \setstretch{1.25}
 
-
-
-
 \RequirePackage[ngerman, english]{babel}
+
+%===========================================================================================
+% math options
+%===========================================================================================
+
+\sisetup{exponent-product = \cdot}
+
+\numberwithin{equation}{subsection}
+
+%===========================================================================================
+% others
+%===========================================================================================
 
 % Adjust numbering depth and TOC depth here
 \setcounter{secnumdepth}{1} % Number only to \subsection
 \setcounter{tocdepth}{1}    % Show down to \paragraph in TOC
 
 \numberwithin{figure}{section}
-\numberwithin{equation}{subsection}

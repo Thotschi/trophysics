@@ -1,10 +1,11 @@
 \documentclass[12pt, twoside, 
                a4paper,
-               % open = right for phd thesis
+               % % open = right for phd thesis
                open=any,
                titlepage,
                bibliography=totoc,
                xcolor=dvipsnames,
+               % % reduce compilation time when figures are only displayed by frame
                % draft
                ]{scrbook}
 
@@ -15,6 +16,14 @@
 \begin{document}
 
     \tableofcontents
+
+    \clearpage
+
+    \listoffigures
+
+    \clearpage
+
+    \listoftables
 
     \chapter{Theorie}
     \section{Maxwell}
@@ -33,22 +42,22 @@
     \chapter{Neues Kapitel}
     \section{Gauß}
 
-    \autocite{elk}
+    \cite{elk}
 
-    \newpage
+    \FloatBarrier
+    \clearpage
+    \printbibliography
 
     \FloatBarrier
     \clearpage
 
     \pagenumbering{Roman}
-    \input{appendix.tex}
     \setcounter{tocdepth}{1}
     \setcounter{table}{0}
     \setcounter{equation}{0}
     \setcounter{figure}{0}
+    \input{appendix.tex}
 
-    \FloatBarrier
-    \clearpage
-    \printbibliography
+
     
 \end{document}
