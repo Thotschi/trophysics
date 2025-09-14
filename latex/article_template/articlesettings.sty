@@ -1,0 +1,67 @@
+%--------------------------------------------------------------------------------------------------------
+
+\ProvidesPackage{articlesettings}[2025/09/10 v1.0 General settings for any article class]
+
+\usepackage{settings}
+
+%--------------------------------------
+% layout, header and footer
+%--------------------------------------
+
+\usepackage{geometry}
+\geometry{
+	a4paper,
+	% number are space from writable page to borders
+	top=25mm,
+	bottom=20mm,
+	left=25mm,
+	right=25mm
+}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\setlength{\headheight}{15pt}
+\fancyhead[RO]{\slshape\nouppercase{\leftmark}}
+\fancyfoot[LE, RO]{\thepage}
+
+%--------------------------------------
+% text
+%--------------------------------------
+
+\usepackage[ngerman, english]{babel}
+
+% font
+\usepackage{lmodern}
+% line spacing
+\setstretch{1.25}
+% indentation paragraph
+\setlength\parindent{0pt}
+
+%--------------------------------------
+% tables and figures
+%--------------------------------------
+
+\usepackage{caption}
+\captionsetup[figure]{labelfont={bf,sf}}
+\captionsetup[table]{labelfont={bf,sf}}
+
+%--------------------------------------
+% references
+%--------------------------------------
+
+% number chapters to what level deep
+\setcounter{secnumdepth}{2} % subsection
+% include sections to what level in toc
+\setcounter{tocdepth}{2}    % subsection
+
+%--------------------------------------
+% math options
+%--------------------------------------
+
+\sisetup{exponent-product = \cdot}
+
+\numberwithin{equation}{subsection}
+
+
+

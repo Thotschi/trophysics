@@ -1,5 +1,5 @@
 %===========================================================================================
-% bibliography settings
+% bibliography options
 %===========================================================================================
 
 \usepackage{csquotes}
@@ -17,13 +17,17 @@ minbibnames=1,
 \addbibresource{references.bib}
 \DeclareLanguageMapping{english}{english-apa}
 \DefineBibliographyStrings{english}{
-   andothers = {{et\,al\adddot}},
+	andothers = {{et\,al\adddot}},
 }
 
+% author names in small caps
 \renewcommand*{\mkbibnamefamily}{\textsc}
 
-\RequirePackage[pdfpagelabels=true,hidelinks]{hyperref}
-% insert \printbibliography whereever you want the references to appear in your pdf
+% neccessary if statement because beamer already loads hyperref
+\ifcsname hyperref\endcsname
+  % if hyperref was already loaded, do nothing
+\else
+  \usepackage[pdfpagelabels=true,hidelinks]{hyperref}
+\fi
 
-% % usage: \eqcite{421}{13.23}{Demtroeder1}; output: [2, p. 421, Eq. (13.23)]
 \newcommand*{\eqcite}[3]{\cite[p.~#1, Eq.~(#2)]{#3}}

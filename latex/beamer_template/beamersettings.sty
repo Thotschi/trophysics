@@ -1,15 +1,68 @@
-\ProvidesPackage{beamersettings}
+%=======================================================================================
+
+\ProvidesPackage{beamersettings}[2025/09/10 v1.0 General settings for beamer class]
 
 \usepackage{../settings}
 
-\usepackage{csquotes}
-\usepackage[
-    backend=biber,
-    bibwarn=true,
-    bibencoding=utf8,
-    % set alphabetical order of references for german languages
-    % sortlocale=de_DE,
-    style=numbering,
-]{biblatex}
+%=========================================================
+% template
+%=========================================================
 
-\usepackage[hidelinks]{hyperref}
+%-----------------------------------
+% footer
+%-----------------------------------
+
+% clear navigation symbols
+\beamertemplatenavigationsymbolsempty
+% font size
+\setbeamerfont{author in head/foot}{size=\scriptsize}
+\setbeamerfont{institute in head/foot}{size=\scriptsize}
+\setbeamerfont{date in head/foot}{size=\scriptsize}
+\setbeamerfont{page number in head/foot}{size=\scriptsize}
+\setbeamertemplate{footline}{
+	% jump into horizontal mode
+	\leavevmode
+	\hbox{
+		% wd = width of frame, ht = height above baseline, dp = depth below baseline
+		\begin{beamercolorbox}[wd=.34\paperwidth,ht=2.3ex,dp=1ex,left]{author in head/foot}
+			\usebeamerfont{author in head/foot, institute in head/foot}\insertshortauthor, \textsc{\insertshortinstitute}
+		\end{beamercolorbox}
+		\begin{beamercolorbox}[wd=.33\paperwidth,ht=2.3ex,dp=1ex,center]{date in head/foot}
+			\usebeamerfont{date in head/foot}\insertshortdate
+		\end{beamercolorbox}
+		\begin{beamercolorbox}[wd=.33\paperwidth,ht=2.3ex,dp=1ex,right]{page number in head/foot}
+			\insertframenumber{}
+			% % show total number of frames
+			% / \inserttotalframenumber
+			\hspace*{3.5ex}
+		\end{beamercolorbox}
+	}
+	\vskip0pt
+}
+
+%-----------------------------------
+% disable template on title page
+%-----------------------------------
+
+\makeatletter
+\def\ps@navigation@titlepage{
+	\setbeamertemplate{footline}{}
+	\setbeamertemplate{headline}{}
+	\setbeamertemplate{navigation symbols}{}
+	\@nameuse{ps@navigation}}
+\addtobeamertemplate{title page}{\thispagestyle{navigation@titlepage}}{}
+\makeatother
+
+%-----------------------------------
+% theme
+%-----------------------------------
+
+\useoutertheme{miniframes} % alternatively: infolines, split, sidebar
+\useinnertheme{circles} % alternatively: rectangles, rounded
+\usecolortheme[named=Maroon]{structure}
+
+%-----------------------------------
+% other
+%-----------------------------------
+
+\captionsetup{font=scriptsize,labelfont=scriptsize}

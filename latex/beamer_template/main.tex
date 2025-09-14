@@ -1,10 +1,35 @@
-\documentclass{beamer}
-% handout
+\documentclass[aspectratio=169,
+							12pt,
+							titlepage,
+							bibliography=totoc,
+							xcolor=dvipsnames,
+							% handout,
+							]{beamer}
 
 \usepackage{beamersettings}
 
+\beamerdefaultoverlayspecification{<+->}
+
+\input{bibliographyoptions.tex}
+
 \begin{document}
-    \begin{frame}<.->
-        
-    \end{frame}
+	\title{Theory of special relativity: An introduction} 
+	\author{Thorge Reinisch} 
+	\institute{\textsc{Faculty of physics}}
+	\date{\today} 
+	
+	\frame{\titlepage}
+	
+	\frame{\frametitle{Table of contents}\tableofcontents} 
+	
+	\section{Introduction}
+
+    \begin{frame}{Overview}
+        \begin{enumerate}
+            \setlength{\itemsep}{20pt}
+            \item tree
+            \item super tree
+            \item mega tree
+        \end{enumerate}
+	\end{frame}
 \end{document}
