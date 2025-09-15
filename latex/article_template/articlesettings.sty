@@ -2,28 +2,92 @@
 
 \ProvidesPackage{articlesettings}[2025/09/10 v1.0 General settings for any article class]
 
-\usepackage{settings}
+\usepackage{../settings}
 
-%--------------------------------------
-% layout, header and footer
-%--------------------------------------
+%===========================================================================================
+% layout and formatting options (depending on documentclass)
+%===========================================================================================
 
-\usepackage{geometry}
-\geometry{
-	a4paper,
-	% number are space from writable page to borders
-	top=25mm,
-	bottom=20mm,
-	left=25mm,
-	right=25mm
-}
+\RequirePackage{etoolbox}
 
-\usepackage{fancyhdr}
-\pagestyle{fancy}
-\fancyhf{}
-\setlength{\headheight}{15pt}
-\fancyhead[RO]{\slshape\nouppercase{\leftmark}}
-\fancyfoot[LE, RO]{\thepage}
+% 1. test if KOMA-Script was loaded
+\newif\ifIsKOMA
+\ifdef{\KOMAClassName}{\IsKOMAtrue}{\IsKOMAfalse}
+
+%-----------------------------------------------------------------------
+% 2. if KOMA-Script: set options
+\ifIsKOMA
+
+	%--------------------------------------
+	% format
+	%--------------------------------------
+
+	% optional: set BCOR if binding correction is needed
+	\KOMAoptions{paper=a4, twoside=false, BCOR=0mm}
+	\areaset{160mm}{252mm}
+
+	%--------------------------------------
+	% header and footer
+	%--------------------------------------
+
+	\RequirePackage[automark,headsepline]{scrlayer-scrpage}
+	\clearpairofpagestyles
+
+	\automark[subsection]{section}
+
+	% outer header: even = Chapter outer left, odd = Section outer right
+	\ohead{\ifthispageodd{\slshape\rightmark}{\slshape\leftmark}}
+
+	% outer footer
+	\ofoot{\pagemark}
+
+	% space to top end of page
+	\setlength{\headheight}{50pt}
+	% space between header and text
+	\setlength{\headsep}{10mm}
+
+	%--------------------------------------
+	% text and captions
+	%--------------------------------------
+
+	% settings captions
+	\setkomafont{captionlabel}{\sffamily\bfseries}
+	% indentation caption
+	\setcapindent{0em}
+
+%-----------------------------------------------------------------------
+\else
+
+	%--------------------------------------
+	% layout, header and footer
+	%--------------------------------------
+
+	\usepackage{geometry}
+	\geometry{
+		a4paper,
+		% number are space from writable page to borders
+		top=25mm,
+		bottom=20mm,
+		left=25mm,
+		right=25mm
+	}
+
+	\usepackage{fancyhdr}
+	\pagestyle{fancy}
+	\fancyhf{}
+	\setlength{\headheight}{15pt}
+	\fancyhead[RO]{\slshape\nouppercase{\leftmark}}
+	\fancyfoot[LE, RO]{\thepage}
+
+	%--------------------------------------
+	% tables and figures
+	%--------------------------------------
+
+	\usepackage{caption}
+	\captionsetup[figure]{labelfont={bf,sf}}
+	\captionsetup[table]{labelfont={bf,sf}}
+
+\fi
 
 %--------------------------------------
 % text
@@ -35,16 +99,10 @@
 \usepackage{lmodern}
 % line spacing
 \setstretch{1.25}
-% indentation paragraph
-\setlength\parindent{0pt}
 
-%--------------------------------------
-% tables and figures
-%--------------------------------------
-
-\usepackage{caption}
-\captionsetup[figure]{labelfont={bf,sf}}
-\captionsetup[table]{labelfont={bf,sf}}
+% spacing between paragraphs
+% \setlength{\parskip}{0.5\baselineskip}
+\setlength{\parindent}{0pt}
 
 %--------------------------------------
 % references

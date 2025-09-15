@@ -37,6 +37,8 @@
 !README.pdf
 !dependencies.txt
 
+!minkowski_diagrams.pdf
+
 
 # other content like png, csv, txt should be reproducible by code in this repo
 # or else storaged in a corresponding cloud server

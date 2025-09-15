@@ -1,3 +1,5 @@
+%===========================================================================================
+
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{booksettings}[2025/08/24 Unified template for KOMA and standard classes]
 
@@ -34,7 +36,7 @@
   \RequirePackage[automark,headsepline]{scrlayer-scrpage}
   \clearpairofpagestyles
 
-  \automark[section]{chapter} % füllt \leftmark (Kapitel) und \rightmark (Section)
+  \automark[section]{chapter} % fills \leftmark (chapter) und \rightmark (section)
 
   % outer header: even = Chapter outer left, odd = Section outer right
   \ohead{\ifthispageodd{\slshape\rightmark}{\slshape\leftmark}}
@@ -42,12 +44,14 @@
   % outer footer
   \ofoot{\pagemark}
 
+  % space to top end of page
+	\setlength{\headheight}{50pt}
+	% space between header and text
+	\setlength{\headsep}{10mm}
+
   %--------------------------------------
   % text and captions
   %--------------------------------------
-
-  % indentation paragraph
-  \setlength\parindent{15pt}
 
   % settings captions
   \setkomafont{captionlabel}{\sffamily\bfseries}
@@ -86,12 +90,8 @@
   % to remove header/footer on specific pages
 
   %--------------------------------------
-  % text and captions
+  % tables and figures
   %--------------------------------------
-
-  % Optional: Zeilenabstand zwischen Absätzen
-  \setlength{\parskip}{0.5\baselineskip}
-  \setlength{\parindent}{15pt}
 
   \RequirePackage{caption}
   \captionsetup[figure]{labelfont={bf,sf}}
@@ -104,6 +104,10 @@
 
 \usepackage{lmodern}
 \setstretch{1.25}
+
+% spacing between paragraphs
+\setlength{\parskip}{0.5\baselineskip}
+\setlength{\parindent}{15pt}
 
 \RequirePackage[ngerman, english]{babel}
 
