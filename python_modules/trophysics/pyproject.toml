@@ -1,0 +1,51 @@
+[build-system]
+# required packages for build process
+requires = ["setuptools>=80.9.0","wheel>=0.45.1","cython>=3.1.2","numpy>=2.3.1"]
+# use setuptools to build project via PEP 517 interface
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "phydesim"
+dynamic = ["version"]
+description = "This module provides stepper implemented in Python and C for solving differential equations."
+license-files = ["LICENSE.txt"]
+readme = "README.md"
+requires-python = ">=3.13"
+authors = [
+    { name = "Gregor Rodehutskors"},
+    { name = "Thorge Reinisch"},
+]
+maintainers = [
+    { name = "Thorge Reinisch", email = "k.reinisch@stud.uni-goettingen.de"}
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Cython",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Scientific/Engineering",
+    "Operating System :: Unix",
+    "Operating System :: MacOS",
+]
+
+# --> automatically installed by pip if not already installed
+dependencies = [
+    "setuptools >= 80.9.0",
+    "wheel >= 0.45.1",
+    "cython >= 3.1.2",
+    "numpy >= 2.3.1"
+]
+
+[project.urls]
+# homepage = 
+repository = "https://gitlab.gwdg.de/k.reinisch/python-projekt-2025/-/tree/main/phydesim"
+documentation = "https://gitlab.gwdg.de/k.reinisch/python-projekt-2025/-/blob/main/phydesim/README.md"
+
+[project.scripts]
+phydesim = "phydesim.cli:main"
+
+
+[tool.setuptools.dynamic]
+version = {attr = "phydesim.__version__"}
