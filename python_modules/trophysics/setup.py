@@ -28,8 +28,8 @@ The C file is then compiled into a shared object file (.so)
 """
 
 name = "_core"  # name of the library
-filepath = "phydesim/rk_lib/_cython/"
-modulepath = "phydesim.rk_lib._cython."
+filepath = "trophysics/integrate/_cython/"
+modulepath = "trophysics.integrate._cython."
 
 
 #==============================================================================

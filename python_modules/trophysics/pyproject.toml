@@ -5,14 +5,13 @@ requires = ["setuptools>=80.9.0","wheel>=0.45.1","cython>=3.1.2","numpy>=2.3.1"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "phydesim"
+name = "trophysics"
 dynamic = ["version"]
-description = "This module provides stepper implemented in Python and C for solving differential equations."
+description = "This module provides a broad range of utilities for physical applications."
 license-files = ["LICENSE.txt"]
 readme = "README.md"
 requires-python = ">=3.13"
 authors = [
-    { name = "Gregor Rodehutskors"},
     { name = "Thorge Reinisch"},
 ]
 maintainers = [
@@ -40,12 +39,12 @@ dependencies = [
 
 [project.urls]
 # homepage = 
-repository = "https://gitlab.gwdg.de/k.reinisch/python-projekt-2025/-/tree/main/phydesim"
-documentation = "https://gitlab.gwdg.de/k.reinisch/python-projekt-2025/-/blob/main/phydesim/README.md"
+# repository = 
+# documentation = 
 
 [project.scripts]
-phydesim = "phydesim.cli:main"
+trophysics = "trophysics._cli._main:main"
 
 
 [tool.setuptools.dynamic]
-version = {attr = "phydesim.__version__"}
+version = {attr = "trophysics.__version__"}

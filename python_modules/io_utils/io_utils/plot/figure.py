@@ -28,8 +28,6 @@ def create_fig_withoutgrid(fig_size = (14, 9)):
 
 def layout_on_axis(ax):
     from matplotlib.ticker import AutoMinorLocator
-    # Größe der Tick-Labels
-    ax.tick_params(axis='both', labelsize='large')
     # Major Grid
     ax.grid(which='major', color='#CCCCCC', linestyle='--')
     ax.xaxis.set_minor_locator(AutoMinorLocator(5))

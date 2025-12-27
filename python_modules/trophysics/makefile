@@ -29,8 +29,8 @@ install:
 clean_build:
 	rm -rf build/
 	rm -rf dist/
-	rm -rf phydesim.egg-info
-	rm -f phydesim/rk_lib/_cython/_core.c
-	rm -f phydesim/rk_lib/_cython/*.html
-	rm -f phydesim/rk_lib/_cython/*.so
+	rm -rf trophysics.egg-info
+	rm -f trophysics/integrate/_cython/_core.c
+	rm -f trophysics/integrate/_cython/*.html
+	rm -f trophysics/integrate/_cython/*.so
 	rm -f *.so
