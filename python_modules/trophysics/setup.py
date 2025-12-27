@@ -27,7 +27,8 @@ During the build process, Cython generates a C file from the .pyx file.
 The C file is then compiled into a shared object file (.so)
 """
 
-name = "_core"  # name of the library
+name = "trophysics"  # name of the library
+extension_names = ["_rk2", "_rk4", "_rk45"]
 filepath = "trophysics/integrate/_cython/"
 modulepath = "trophysics.integrate._cython."
 
@@ -50,7 +51,8 @@ c_header_compile_args = []
 c_header_path = []
 
 #==============================================================================
-extension = Extension(
+extensions = [
+    Extension(
     name = modulepath + name,             
     sources = [filepath + name + ".pyx"],
     # combine all c compiler args
@@ -60,13 +62,15 @@ extension = Extension(
     include_dirs = [numpy.get_include()] + c_header_path,
     # if code does require old numpy API we turn it off
     define_macros=[("NPY_NO_DEPRECATED_API", "NPY_1_7_API_VERSION")],
-)
+    ) for name in extension_names
+]
+
 
 setup(
     name = name,
     packages = find_packages(),
     ext_modules = cythonize(
-        extension,
+        extensions,
         compiler_directives = {
             "language_level": 3,  # Python-3 syntax
             # next two are set to False for performance

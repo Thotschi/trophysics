@@ -30,7 +30,7 @@ clean_build:
 	rm -rf build/
 	rm -rf dist/
 	rm -rf trophysics.egg-info
-	rm -f trophysics/integrate/_cython/_core.c
+	rm -f trophysics/integrate/_cython/*.c
 	rm -f trophysics/integrate/_cython/*.html
 	rm -f trophysics/integrate/_cython/*.so
 	rm -f *.so

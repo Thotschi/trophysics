@@ -1,95 +1,5 @@
-# boundscheck=False, wraparound=False, cdivision=True, nonecheck=False
-# write "cython:" in front of line above for these options to take effect
-# but we use compiler directives in setup.py instead
 import numpy as np
 cimport numpy as np
-
-#-------------------------------------------------------------------------------------
-# rk2
-
-cpdef np.ndarray[np.float64_t, ndim=1] rk2_step(
-    double t,
-    double dt,
-    np.ndarray[np.float64_t, ndim=1] py_y,
-    object py_ODE_func,
-    object params
-):
-    if not py_y.flags['C_CONTIGUOUS']:
-        py_y = np.ascontiguousarray(py_y, dtype=np.float64)
-
-    cdef int n = py_y.shape[0]
-    cdef int i
-
-    # Allocate arrays (C-contiguous by default)
-    cdef np.ndarray[np.float64_t, ndim=1] sup = np.empty(n, dtype=np.float64)
-
-    # Pointers for speed (analog to malloc. Therfore, arrays must be C-contiguous)
-    cdef double* y_ptr = <double*> py_y.data
-    cdef double* sup_ptr = <double*> sup.data
-
-    sup[:] = py_ODE_func(t, py_y, params)
-    for i in range(n):
-        sup_ptr[i] = y_ptr[i] + 0.5 * dt * sup_ptr[i]
-
-    sup[:] = py_ODE_func(t + 0.5 * dt, sup, params)
-    for i in range(n):
-        sup_ptr[i] = y_ptr[i] + 0.5 * dt * sup_ptr[i]
-
-    return sup
-
-#-------------------------------------------------------------------------------------
-# rk4
-
-cpdef np.ndarray[np.float64_t, ndim=1] rk4_step(
-    double t,
-    double dt,
-    np.ndarray[np.float64_t, ndim=1] py_y,
-    object py_ODE_func,
-    object params
-):
-
-    if not py_y.flags['C_CONTIGUOUS']:
-        py_y = np.ascontiguousarray(py_y, dtype=np.float64)
-
-    cdef int n = py_y.shape[0]
-    cdef int i
-
-    # Allocate arrays (C-contiguous by default)
-    cdef np.ndarray[np.float64_t, ndim=1] k1 = np.empty(n, dtype=np.float64)
-    cdef np.ndarray[np.float64_t, ndim=1] k2 = np.empty(n, dtype=np.float64)
-    cdef np.ndarray[np.float64_t, ndim=1] k3 = np.empty(n, dtype=np.float64)
-    cdef np.ndarray[np.float64_t, ndim=1] k4 = np.empty(n, dtype=np.float64)
-    cdef np.ndarray[np.float64_t, ndim=1] sup = np.empty(n, dtype=np.float64)
-    cdef np.ndarray[np.float64_t, ndim=1] y_new = np.empty(n, dtype=np.float64)
-
-    # Pointers for speed (analog to malloc. Therfore, arrays must be C-contiguous)
-    cdef double* y_ptr = <double*> py_y.data
-    cdef double* sup_ptr = <double*> sup.data
-    cdef double* y_new_ptr = <double*> y_new.data
-    cdef double* k1_ptr = <double*> k1.data
-    cdef double* k2_ptr = <double*> k2.data
-    cdef double* k3_ptr = <double*> k3.data
-    cdef double* k4_ptr = <double*> k4.data
-
-    k1[:] = py_ODE_func(t, py_y, params)
-    for i in range(n):
-        sup_ptr[i] = y_ptr[i] + 0.5 * dt * k1_ptr[i]
-
-    k2[:] = py_ODE_func(t + 0.5 * dt, sup, params)
-    for i in range(n):
-        sup_ptr[i] = y_ptr[i] + 0.5 * dt * k2_ptr[i]
-
-    k3[:] = py_ODE_func(t + 0.5 * dt, sup, params)
-    for i in range(n):
-        sup_ptr[i] = y_ptr[i] + dt * k3_ptr[i]
-
-    k4[:] = py_ODE_func(t + dt, sup, params)
-    for i in range(n):
-        y_new_ptr[i] = y_ptr[i] + (dt / 6.0) * (
-            k1_ptr[i] + 2.0 * k2_ptr[i] + 2.0 * k3_ptr[i] + k4_ptr[i]
-        )
-
-    return y_new
 
 #-------------------------------------------------------------------------------------
 # rk45
@@ -114,17 +24,13 @@ cdef extern from "math.h":
 
 
 # butcher tableau for RK45
+
 cdef extern from *:
     """
     static const double A[6] = {
         0.0, 0.25, 0.375, 12.0/13.0, 1.0, 0.5
     };
-    """
-    const double A[6]
 
-
-cdef extern from *:
-    """
     static const double B[6][5] = {
         {0, 0, 0, 0, 0},
         {0.25, 0, 0, 0, 0},
@@ -142,6 +48,7 @@ cdef extern from *:
         16.0/135.0, 0.0, 6656.0/12825.0, 28561.0/56430.0, -9.0/50.0, 2.0/55.0
     };
     """
+    const double A[6]
     const double B[6][5]
     const double C4[6]
     const double C5[6]
