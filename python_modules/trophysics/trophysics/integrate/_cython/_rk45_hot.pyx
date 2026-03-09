@@ -4,21 +4,6 @@ cimport numpy as np
 #-------------------------------------------------------------------------------------
 # rk45
 
-cdef class PyRHSWrapper:
-    cdef object f
-    cdef object params
-
-    def __init__(self, f, params):
-        self.f = f
-        self.params = params
-
-    cpdef eval(self, double t, double[:] y, double[:] dydt):
-        cdef np.ndarray[np.float64_t, ndim=1] out = self.f(t, np.asarray(y), self.params)
-        cdef Py_ssize_t i, n = out.shape[0]
-        for i in range(n):
-            dydt[i] = out[i]
-
-
 cdef extern from "math.h":
     double fabs(double x)
 
@@ -54,37 +39,29 @@ cdef extern from *:
     const double C5[6]
 
 
-cpdef tuple rk45_step(
+cdef tuple rk45_step(
+    PyRHSWrapper rhs,
+    double[:] y,
     double t,
+    double[::1, ::1] k,
+    double[:] sup,
+    double[:] y4,
+    double[:] y5,
     double dt,
-    np.ndarray[np.float64_t, ndim=1] py_y,
-    object py_ODE_func,
-    object params,
-    double tol
+    double tol,
+    int n,
 ):
-    if not py_y.flags['C_CONTIGUOUS']:
-        py_y = np.ascontiguousarray(py_y, dtype=np.float64)
 
-    cdef PyRHSWrapper rhs = PyRHSWrapper(py_ODE_func, params)
-
-    cdef int n = py_y.shape[0]
     cdef int i, j, m
 
-    cdef np.ndarray[np.float64_t, ndim=2] k = np.empty((6, n), dtype=np.float64, order="C")
-    cdef np.ndarray[np.float64_t, ndim=1] sup = np.empty(n, dtype=np.float64)
-    cdef np.ndarray[np.float64_t, ndim=1] y4 = np.empty(n, dtype=np.float64)
-    cdef np.ndarray[np.float64_t, ndim=1] y5 = np.empty(n, dtype=np.float64)
-
-    # -------- memoryviews (entscheidend!) --------
-    cdef double[:] y_mv = py_y
     cdef double[:] sup_mv = sup
     cdef double[:, :] k_mv = k
 
-    cdef double* y_ptr = <double*> py_y.data
-    cdef double* sup_ptr = <double*> sup.data
-    cdef double* k_ptr = <double*> k.data
-    cdef double* y4_ptr = <double*> y4.data
-    cdef double* y5_ptr = <double*> y5.data
+    cdef double* y_ptr  = &py_y[0]
+    cdef double* sup_ptr = &sup[0]
+    cdef double* k_ptr  = &k[0, 0]
+    cdef double* y4_ptr = &y4[0]
+    cdef double* y5_ptr = &y5[0]
 
     # stages
     for i in range(6):
@@ -108,7 +85,7 @@ cpdef tuple rk45_step(
     cdef double err = 0.0
     cdef double diff
     for j in range(n):
-        diff = fabs(y5[j] - y4[j])
+        diff = fabs(y5_ptr[j] - y4_ptr[j])
         if diff > err:
             err = diff
 

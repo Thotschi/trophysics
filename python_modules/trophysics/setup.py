@@ -28,7 +28,7 @@ The C file is then compiled into a shared object file (.so)
 """
 
 name = "trophysics"  # name of the library
-extension_names = ["_rk2", "_rk4", "_rk45"]
+extension_names = ["_rk2", "_rk4", "_rk45", "_PyRHSWrapper"]
 filepath = "trophysics/integrate/_cython/"
 modulepath = "trophysics.integrate._cython."
 
