@@ -68,3 +68,12 @@
 \captionsetup{font=scriptsize,labelfont=scriptsize}
 
 \usepackage{lmodern}
+
+%-----------------------------------
+% own macros
+%-----------------------------------
+
+% make itemize items appear gray after they have been shown once
+\newcommand{\doneitem}[2]{%
+	\item \alt<#1>{#2}{\textcolor{gray!70}{#2}}%
+}

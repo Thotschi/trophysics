@@ -79,6 +79,9 @@
 % % insert in each new document: \setstretch{x}, e.g. x = 1.25 to change
 % allows output of umlauts in pdf --> for compilation
 
+% verbatim environment for unformatted text
+\usepackage{verbatim}
+
 \RequirePackage[utf8]{inputenc}
 \RequirePackage[T1]{fontenc}
 
@@ -149,6 +152,9 @@
 % text block next to figure
 \RequirePackage{wrapfig}
 \RequirePackage{subfig}
+% \animategraphics[loop,autoplay,width=\textwidth]{10}{figures/frame-}{0}{31} animates pictures with name "frame-0.png"
+% until "frame-31.png" at 10 fps
+\RequirePackage{animate}
 % prevents floats from entering another section (in best hope)
 \RequirePackage{placeins}
 % makes inclusion of external pdfs in main.tex easier
@@ -159,7 +165,7 @@
 \RequirePackage{gradientframe}
 
 % std path for graphics
-\graphicspath{{images/}}
+\graphicspath{{figures/}}
 
 %===========================================================================================
 % table settings
@@ -169,6 +175,7 @@
 \RequirePackage{multirow}
 % usage: \makecell{row1\\row2} is formatted as one cell in table
 \RequirePackage{makecell}
+\RequirePackage{booktabs}
 
 % % the code below allows to create tables with data which is imported from csv file
 \RequirePackage{csvsimple}
