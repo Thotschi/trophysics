@@ -24,7 +24,7 @@
 
 	% optional: set BCOR if binding correction is needed
 	\KOMAoptions{paper=a4, twoside=false, BCOR=0mm}
-	\areaset{160mm}{252mm}
+	\areaset{160mm}{240mm}
 
 	%--------------------------------------
 	% header and footer
@@ -36,15 +36,15 @@
 	\automark[subsection]{section}
 
 	% outer header: even = Chapter outer left, odd = Section outer right
-	\ohead{\ifthispageodd{\slshape\rightmark}{\slshape\leftmark}}
+	\ohead{\Ifthispageodd{\slshape\rightmark}{\slshape\leftmark}}
 
 	% outer footer
 	\ofoot{\pagemark}
 
 	% space to top end of page
-	\setlength{\headheight}{50pt}
+	\setlength{\headheight}{40pt}
 	% space between header and text
-	\setlength{\headsep}{10mm}
+	\setlength{\headsep}{7mm}
 
 	%--------------------------------------
 	% text and captions
@@ -121,5 +121,13 @@
 
 \numberwithin{equation}{subsection}
 
+%--------------------------------------
+% chapters
+%--------------------------------------
 
+% titles of appendix chapters automatically start with Appendix A. ...
+\usepackage[titletoc,title]{appendix}
 
+\AtBeginEnvironment{appendices}{%
+  \renewcommand{\thesection}{\Alph{section}.}
+}

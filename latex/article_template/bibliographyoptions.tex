@@ -30,4 +30,27 @@ minbibnames=1,
   \usepackage[pdfpagelabels=true,hidelinks]{hyperref}
 \fi
 
+\usepackage[capitalise,nameinlink,noabbrev]{cleveref}
+
+% synthax: \crefname{<counter>}{<Singular>}{<Plural>}
+
+\crefname{equation}{eq.}{eqs.}
+\Crefname{equation}{Eq.}{Eqs.}
+
+\crefname{figure}{fig.}{figs.}
+\Crefname{figure}{Fig.}{Figs.}
+
+\crefname{section}{sec.}{secs.}
+\Crefname{section}{Sec.}{Secs.}
+
+\crefname{subsection}{subsec.}{subsecs.}
+\Crefname{subsection}{Subsec.}{Subsecs.}
+
+\crefname{paragraph}{paragraph}{paragraphs}
+\Crefname{paragraph}{Paragraph}{Paragraphs}
+
+\newcommand\crefrangeconjunction{--}
+\newcommand\Crefrangeconjunction{--}
+
+
 \newcommand*{\eqcite}[3]{\cite[p.~#1, Eq.~(#2)]{#3}}
