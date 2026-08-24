@@ -12,10 +12,10 @@ sortlocale=en_US,
 style=phys,
 maxbibnames=3,
 minbibnames=1,
+url=true,
 ]{biblatex}
 
 \addbibresource{references.bib}
-\DeclareLanguageMapping{english}{english-apa}
 \DefineBibliographyStrings{english}{
    andothers = {{et\,al\adddot}},
 }
@@ -49,3 +49,8 @@ minbibnames=1,
 
 % % usage: \eqcite{421}{13.23}{Demtroeder1}; output: [2, p. 421, Eq. (13.23)]
 \newcommand*{\eqcite}[3]{\cite[p.~#1, Eq.~(#2)]{#3}}
+
+% section name inserted using \printbibliography
+\DefineBibliographyStrings{english}{
+	references = {Literature},
+}
